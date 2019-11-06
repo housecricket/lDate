@@ -1,0 +1,23 @@
+{
+  "name": "@junryo/ldate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/ldate.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://housecricket@github.com/housecricket/lDate.git"
+  },
+  "author": "junryo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/housecricket/lDate/issues"
+  },
+  "homepage": "https://github.com/housecricket/lDate#readme",
+  "dependencies": {
+    "@junryo/astrology-constants": "file:../astrology-constants",
+    "@junryo/astrology-utils": "file:../astrology-utils"
+  }
+}
