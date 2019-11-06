@@ -1,11 +1,4 @@
-const {
-    getMingNeiyinOfGanZhi,
-    isGoodDay,
-    jdFromDate,
-    convertSolar2Lunar,
-    findGoodHoursInDay,
-    getGanZhi
-} = require('@junryo/astrology-utils');
+const assignValuesForDate = require('./assignValuesForDate');
 
 var LDate = (function (Date, Math, Array, undefined) {
 
@@ -24,16 +17,8 @@ var LDate = (function (Date, Math, Array, undefined) {
         if (!len) {
             //now
             let date = new Date();
-            let lunarDate = convertSolar2Lunar(date.getUTCDate(), date.getUTCMonth() + 1, date.getUTCFullYear(), -date.getTimezoneOffset() / 60);
-            ldate.year = lunarDate[2]
-            ldate.month = lunarDate[1]
-            ldate.day = lunarDate[0]
-            ldate.goodHours = findGoodHoursInDay('Tí')
-            ldate.cDate = getGanZhi.ofDay(jdFromDate(date.getUTCDate(), date.getUTCMonth() + 1, date.getUTCFullYear()));
-            ldate.cMonth = getGanZhi.ofMonth(ldate.year, ldate.month);
-            ldate.cYear = getGanZhi.ofYear(ldate.year);
-            ldate.goodDay = isGoodDay(ldate.cMonth, ldate.cDate);
-            ldate.mingNeiyin = getMingNeiyinOfGanZhi(ldate.cDate);
+            ldate = assignValuesForDate(ldate, date);
+            
         }
 
         return ldate;
