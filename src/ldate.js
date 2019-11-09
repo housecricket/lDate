@@ -16,8 +16,8 @@ var LDate = (function (Date, Math, Array, undefined) {
         // creates a new LDate with the current date and time
         if (!len) {
             //now
-            let date = new Date();
-            ldate = assignValuesForDate(ldate, date);
+            let sDate = new Date();
+            ldate = assignValuesForDate(ldate, sDate);
             
         }
 

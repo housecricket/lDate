@@ -25,6 +25,14 @@ module.exports = function (lDate, sDate) {
     lDate.element = getElementOfDay(lDate.cDate);
     lDate.goodStars = getGoodStarsInDay(lDate.month, lDate.cDate),
     lDate.badStars = getBadStarsInDay(lDate.day, lDate.month, lDate.cDate),
+
     lDate.star = getStarOfDay(sDate.getUTCDate(), sDate.getUTCMonth() + 1, sDate.getUTCFullYear());
+
+    // việc nên làm
+    lDate.auspicious = ''
+
+    // việc không nên làm
+    lDate.inauspicious = ''
+
     return lDate;
 }
