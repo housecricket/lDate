@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/housecricket/lDate#readme",
   "dependencies": {
-    "@junryo/astrology-constants": "file:../astrology-constants",
     "@junryo/astrology-utils": "file:../astrology-utils"
   }
 }
