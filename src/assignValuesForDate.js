@@ -14,33 +14,54 @@ const {
     getWealthDirectionOfHour,
     isGoodDay,
     jdFromDate,
-    jdToDate
+    jdToDate,
+    getSolarFestival,
+    getLunarFestival,
+    getBadAgeOfDay
 } = require('@junryo/astrology-utils');
 
 module.exports = function (lDate, sDate) {
-    let lunarDate = convertSolar2Lunar(sDate.getUTCDate(), sDate.getUTCMonth() + 1, sDate.getUTCFullYear(), -sDate.getTimezoneOffset() / 60);
+
+    // Solar date information 
+    lDate.sDay = sDate.getUTCDate()
+    lDate.sMonth = sDate.getUTCMonth() + 1
+    lDate.sYear = sDate.getUTCFullYear()
+
+    //lunar date information
+    let lunarDate = convertSolar2Lunar(lDate.sDay, lDate.sMonth, lDate.sYear, -sDate.getTimezoneOffset() / 60);
     lDate.year = lunarDate[2]
     lDate.month = lunarDate[1]
     lDate.day = lunarDate[0]
-    lDate.cDay = getGanZhi.ofDay(jdFromDate(sDate.getUTCDate(), sDate.getUTCMonth() + 1, sDate.getUTCFullYear()));
+
+    //lunar date ganzhi
+    lDate.cDay = getGanZhi.ofDay(jdFromDate(lDate.sDay, lDate.sMonth, lDate.sYear));
     lDate.cMonth = getGanZhi.ofMonth(lDate.year, lDate.month);
     lDate.cYear = getGanZhi.ofYear(lDate.year);
 
+    //Festival
+    lDate.lunarFestival = getLunarFestival(lDate.day, lDate.month)
+    lDate.solarFestival = getSolarFestival(lDate.sDay, lDate.sMonth)
+
+    //Good hours, bad hours in specific day
     lDate.goodHours = findGoodHoursInDay(lDate.cDay)
     lDate.badHours = getEvilOfHourInDay(lDate.cDay)
-    lDate.goodDay = isGoodDay(lDate.cMonth, lDate.cDay);
+
+    lDate.isGoodDay = isGoodDay(lDate.cMonth, lDate.cDay);
     lDate.mingNeiyin = getMingNeiyinOfGanZhi(lDate.cDay);
     lDate.element = getElementOfDay(lDate.cDay);
+
+    //Direction for start
     lDate.luckyDirection = getLuckyDirectionOfHour(lDate.cDay)
     lDate.wealthDirection = getWealthDirectionOfHour(lDate.cDay)
 
-    lDate.officer = getOfficerOfDay(sDate.getUTCDate(), sDate.getUTCMonth() + 1, sDate.getUTCFullYear())
-    lDate.getSolarTerm = getSolarTerm(sDate.getUTCDate(), sDate.getUTCMonth() + 1, sDate.getUTCFullYear())
-    // goodStars gồm sao tốt + việc nên làm tương ứng 
+    lDate.officer = getOfficerOfDay(lDate.sDay, lDate.sMonth, lDate.sYear)
+    lDate.solarTerm = getSolarTerm(lDate.sDay, lDate.sMonth, lDate.sYear)
+
     lDate.goodStars = getGoodStarsInDay(lDate.month, lDate.cDay),
-    //badStars gồm sao xấu + việc k nên làm tương ứng
     lDate.badStars = getBadStarsInDay(lDate.day, lDate.month, lDate.cDay),
-    lDate.star = getStarOfDay(sDate.getUTCDate(), sDate.getUTCMonth() + 1, sDate.getUTCFullYear());
+    lDate.star = getStarOfDay(lDate.sDay, lDate.sMonth, lDate.sYear);
+
+    lDate.badAges = getBadAgeOfDay(lDate.cDay)
 
     return lDate;
 }
