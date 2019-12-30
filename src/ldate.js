@@ -2,16 +2,20 @@ const assignValuesForDate = require('./assignValuesForDate');
 
 var LDate = (function (Date, Math, Array, undefined) {
 
-    function LDate(date) {
-        return init(
-            (this instanceof LDate) ? this : new LDate(date),
-            date);
+    function LDate() {
+
+        if (typeof LDate.instance === 'object'){
+            return LDate.instance
+        }
+
+        LDate.instance = this
+        // return init(
+        //     (this instanceof LDate) ? this : new LDate(date),
+        //     date);
+        
     }
 
-    function init(ldate, date) {
-        ldate = assignValuesForDate(ldate, date);
-        return ldate;
-    }
+    
 
     var proto = LDate.prototype;
     proto.length = 1;
@@ -20,6 +24,11 @@ var LDate = (function (Date, Math, Array, undefined) {
     proto.toString = function () {
         return this.year + '年' + this.month + '月' + this.day + '日';
     };
+
+    proto.init = function(date) {
+        ldate = assignValuesForDate(this, date);
+        return ldate;
+    }
 
     proto.toJSON = function() {
         return {
@@ -38,16 +47,22 @@ var LDate = (function (Date, Math, Array, undefined) {
             'goodHours' : this.goodHours,
             'badHours' : this.badHours,
             'isGoodDay' : this.isGoodDay,
-            'mingNeiyin' : this.mingNeiyin,
-            'element' : this.element,
+            'mingNeiyinOfYear' : this.mingNeiyinOfYear,
+            'mingNeiyinOfDay' : this.mingNeiyinOfDay,
+            'elementOfDay' : this.elementOfDay,
+            'elementOfYear': this.elementOfYear,
             'luckyDirection' : this.luckyDirection,
             'wealthDirection' : this.wealthDirection,
+            'evilDirection' : this.evilDirection,
             'officer' : this.officer,
-            'solarTerm' : this.solarTerm,
             'goodStars' : this.goodStars,
             'badStars' : this.badStars,
+            'auspicious' : this.auspicious,
+            'inauspicious' : this.inauspicious,
             'star' : this.star,
-            'badAges' : this.badAges
+            'badAgeOfDay' : this.badAgeOfDay,
+            'badAgeOfMonth' : this.badAgeOfMonth,
+            'timeZodiac' : this.timeZodiac
         }
     }
 
