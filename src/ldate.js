@@ -16,9 +16,16 @@ var LDate = (function (Date, Math, Array, undefined) {
         // creates a new LDate with the current date and time
         if (!len) {
             //now
-            let date = new Date();
-            ldate = assignValuesForDate(ldate, date);
-            
+            ldate = assignValuesForDate(ldate, new Date());
+        } else if (len == 1) {
+            var arg = args[0];
+            console.log(arg)
+            if (arg instanceof Date) {
+                ldate = assignValuesForDate(ldate, new Date(arg.getTime()));
+            }
+            else if (isNumber(arg)) {
+                ldate = new assignValuesForDate(ldate, new Date(arg));
+            }
         }
 
         return ldate;
@@ -49,16 +56,22 @@ var LDate = (function (Date, Math, Array, undefined) {
             'goodHours' : this.goodHours,
             'badHours' : this.badHours,
             'isGoodDay' : this.isGoodDay,
-            'mingNeiyin' : this.mingNeiyin,
-            'element' : this.element,
+            'mingNeiyinOfYear' : this.mingNeiyinOfYear,
+            'mingNeiyinOfDay' : this.mingNeiyinOfDay,
+            'elementOfDay' : this.elementOfDay,
+            'elementOfYear': this.elementOfYear,
             'luckyDirection' : this.luckyDirection,
             'wealthDirection' : this.wealthDirection,
+            'evilDirection' : this.evilDirection,
             'officer' : this.officer,
-            'solarTerm' : this.solarTerm,
             'goodStars' : this.goodStars,
             'badStars' : this.badStars,
+            'auspicious' : this.auspicious,
+            'inauspicious' : this.inauspicious,
             'star' : this.star,
-            'badAges' : this.badAges
+            'badAgeOfDay' : this.badAgeOfDay,
+            'badAgeOfMonth' : this.badAgeOfMonth,
+            'timeZodiac' : this.timeZodiac
         }
     }
 
