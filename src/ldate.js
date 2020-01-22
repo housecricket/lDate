@@ -19,7 +19,6 @@ var LDate = (function (Date, Math, Array, undefined) {
             ldate = assignValuesForDate(ldate, new Date());
         } else if (len == 1) {
             var arg = args[0];
-            console.log(arg)
             if (arg instanceof Date) {
                 ldate = assignValuesForDate(ldate, new Date(arg.getTime()));
             }

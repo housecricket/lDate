@@ -75,6 +75,5 @@ module.exports = function (lDate, sDate) {
     lDate.badAgeOfMonth = getBadAgeOfMonth(lDate.cMonth)
 
     lDate.timeZodiac = getTimeZodiac(lDate.cDay)
-    console.log(lDate.timeZodiac)
     return lDate;
 }
