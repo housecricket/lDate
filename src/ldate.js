@@ -22,7 +22,7 @@ var LDate = (function (Date, Math, Array, undefined) {
             if (arg instanceof Date) {
                 ldate = assignValuesForDate(ldate, new Date(arg.getTime()));
             }
-            else if (isNumber(arg)) {
+            else if (Number.isInteger(arg)) {
                 ldate = new assignValuesForDate(ldate, new Date(arg));
             }
         }
